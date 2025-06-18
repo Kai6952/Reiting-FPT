@@ -1,20 +1,11 @@
 <?php
-// db.php — прямое подключение к MySQL через MySQLi
+$host = 'localhost';
+$user = 'root';
+$password = 'root'; // или '123', если ты ставил пароль
+$database = 'reiting_fpt'; // проверь точное имя своей базы!
 
-// 1) Параметры БД
-$host   = 'localhost';
-$user   = 'root';
-$pass   = 'root';
-$dbname = 'reiting_fpt';
+$conn = mysqli_connect($host, $user, $password, $database);
 
-// 2) Создаём подключение
-$mysqli = new mysqli($host, $user, $pass, $dbname);
-
-// 3) Обработка ошибок подключения
-if ($mysqli->connect_error) {
-    error_log('MySQLi Connect Error: ' . $mysqli->connect_error);
-    die('Не удалось подключиться к БД');
+if (!$conn) {
+    die("Ошибка подключения к базе данных: " . mysqli_connect_error());
 }
-
-// 4) Устанавливаем кодировку
-$mysqli->set_charset('utf8mb4');

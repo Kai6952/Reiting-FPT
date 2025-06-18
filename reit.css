@@ -1,377 +1,163 @@
-body{
-    background-color: #1e1e1e;
+body {
+    background: #121212;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
     margin: 0;
-    min-height: 100vh;
-    font-family: "Montserrat", serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-}
-
-header{
+    padding: 0;
+  }
+  
+  .rounded-block {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #1F2122;
+    border-radius: 25px;
     padding: 30px;
-    display: flex; /* Изменено с inline-flex на flex */
+  }
+  
+  header {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
-    width: 1142px; /* Изменено для соответствия format-container */
-    margin: 0 auto; /* Центрируем хедер */
-}
-
-a, p, label, img, span{
-    user-select: none;
-}
-
-.profile-block-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px; /* Отступ между элементами */
-    background-color: #303031; /* Темнее, чем фон #1e1e1e */
-    border-radius: 25px; /* Закругленные края */
-    padding: 8px 15px; /* Внутренние отступы */
-    text-decoration: none; /* Убираем подчеркивание ссылки */
-    color: #ffffff; /* Цвет текста */
-    transition: background-color 0.3s ease; /* Плавный переход при наведении */
-    height: fit-content; /* Чтобы высота подстраивалась под содержимое */
-}
-
-.profile-block-link:hover {
-    background-color: #454545; /* Цвет при наведении */
-}
-
-.profile-rating {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Отступ между звездой и рейтингом */
-    font-weight: 600;
-}
-
-.star-icon {
-    width: 20px; /* Размер звездочки */
-    height: 20px;
-    fill: #FFD700; /* Цвет звездочки (золотой) */
-}
-
-.average-rating {
-    font-size: 16px;
-    color: #ffffff;
-}
-
-.avatar-image {
-    width: 40px; /* Размер аватарки */
-    height: 40px;
-    border-radius: 50%; /* Делаем аватарку круглой */
-    object-fit: cover; /* Обрезка изображения для заполнения круга */
-    border: 2px solid #00ECDC; /* Тонкая бирюзовая рамка */
-    object-position: center 10%;
-}
-
-/* Изменения для логотипа: по умолчанию большой логотип */
-.logo { /* Сделаем его адаптивным */
-    width: 300px; /* Изначальный размер */
-    height: auto;
-}
-
-.logo.adaptive{
-    display: none;
-}
-
-/* Удален .img, так как он, похоже, был для заглушки */
-
-
-.rounded-block{
-    /* position: relative; было удалено в предыдущих шагах, возвращаем к центрированию */
-    margin: 0 auto 40px; /* Центрируем и устанавливаем отступ снизу */
-    max-width: 800px; /* Максимальная ширина */
-    width: 90%; /* Адаптивная ширина */
-    height: fit-content;
-    border-radius: 40px;
-    background-color: #1F2122;
-    padding: 40px; /* Изначальный padding */
-    box-sizing: border-box; /* Добавлено, чтобы padding учитывался в общей ширине */
-}
-.rounded-block p, label{
-    color: #C0C0C0;
-}
-.teacher-info {
-    margin-bottom: 20px;
-}
-.teacher-info span{
-    margin-left: 20px;
-    color: #00ECDC;
-    font-weight: 600;
-    font-size: 24px;
-}
-
-.criteria-container{
-    display: flex;
-    flex-direction: column; /* Элементы оценивания идут в колонку */
-}
-.criteria {
-    width: 100%; /* Занимает всю ширину контейнера */
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; удалено, чтобы метки не смещались */
-    flex-wrap: nowrap; /* Важно: предотвращает перенос элементов на новую строку в .criteria */
-}
-.criteria input{
-    margin-left: 20px; /* Отступ от метки */
-    flex-grow: 1; /* Слайдер занимает остальное пространство */
-}
-.criteria label {
-    width: 200px; /* Фиксированная ширина для метки */
-    flex-shrink: 0; /* Предотвращает сжатие метки */
-}
-
-.rating {
-    width: 30px; /* Фиксированная ширина для цифры рейтинга */
-    font-weight: 600;
-    text-align: center;
-    flex-shrink: 0; /* Предотвращает сжатие цифры рейтинга */
-    margin-left: 15px; /* Отступ после слайдера */
-}
-
-textarea {
-    background-color: #191A1B;
-    color: #C0C0C0;
-    width: 100%;
-    box-sizing: border-box;
-    min-height: 175px;
-    resize: vertical;
-    margin: 20px 0;
-    padding: 20px;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-}
-
-.button{
-    display: block; /* Сделано блочным для центрирования */
-    margin: 20px auto 0; /* Центрируем кнопку */
+    padding: 20px 60px;
+  }
+  
+  .profile-button {
     background-color: #00ECDC;
-    color: #303031;
-    text-align: center;
-    height: fit-content;
-    padding: 15px;
-    border: none;
-    border-radius: 15px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.5s;
-}
-.button:hover{
-    background-color: #008a81;
-}
-
-.slider {
-    flex-grow: 1; /* Переопределено в input[type="range"] */
-    -webkit-appearance: none;
-    width: 100%; /* Занимает 100% от своего flex-контейнера */
-    height: 30px;
-    background: #333;
-    outline: none;
+    color: #1e1e1e;
+    padding: 10px 20px;
     border-radius: 20px;
-    transition: background 0.3s ease;
-}
-.slider::-webkit-slider-thumb {
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .teacher-photo {
+    max-width: 200px;
+    border-radius: 20px;
+  }
+  
+  .teacher-bio {
+    margin-top: 20px;
+    color: #C0C0C0;
+  }
+  
+  .rating-title {
+    text-align: center;
+    margin-top: 30px;
+    color: #00ECDC;
+  }
+  
+  .criteria-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 20px;
+  }
+  
+  .criteria {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .criteria label {
+    width: 220px;
+    color: #C0C0C0;
+    font-weight: 500;
+  }
+  
+  .slider {
     -webkit-appearance: none;
-    width: 30px;
-    height: 30px;
-    background: var(--thumb-color, #454545);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.slider::-moz-range-thumb {
-    width: 30px;
-    height: 30px;
-    background: #fff;
-    border-radius: 50%;
-    cursor: pointer;
-}
-.slider::-moz-range-track {
+    appearance: none;
     width: 100%;
     height: 10px;
-    background: #555;
+    background: #333;
     border-radius: 5px;
-}
-
-
-/* --- Медиазапросы для адаптивности --- */
-
-/* Для экранов шириной до 1200px (например, ноутбуки или планшеты в горизонтальной ориентации) */
-@media (max-width: 1200px) {
-    header {
-        max-width: 95%; /* Заголовок занимает больше ширины */
-        width: 95%; /* Адаптивная ширина */
-        padding: 20px; /* Уменьшаем отступы */
-    }
-
-    .rounded-block {
-        max-width: 700px; /* Уменьшаем максимальную ширину */
-        width: 95%; /* Большая часть ширины экрана */
-        padding: 30px; /* Уменьшаем внутренние отступы */
-    }
-
-    .criteria label {
-        width: 140px; /* Дополнительно уменьшаем ширину метки для большего места слайдеру */
-    }
-
-    .criteria input {
-        margin-left: 10px; /* Уменьшаем отступ */
-    }
-
-    .rating {
-        margin-left: 10px; /* Уменьшаем отступ */
-    }
-
-    textarea {
-        padding: 15px;
-    }
-}
-
-/* Для экранов шириной до 768px (например, планшеты в вертикальной ориентации или большие смартфоны) */
-@media (max-width: 768px) {
-    header {
-        width: 90%; /* Ширина хедера на меньших экранах */
-        padding: 15px;
-    }
-
-    .logo.original { display: none; }
-    .logo.adaptive { display: block; width: 150px; height: auto; }
-
-    .profile-block-link {
-        padding: 6px 12px;
-        gap: 8px;
-    }
-
-    .star-icon {
-        width: 18px;
-        height: 18px;
-    }
-
-    .average-rating {
-        font-size: 14px;
-    }
-
-    .avatar-image {
-        width: 35px;
-        height: 35px;
-    }
-
-    .rounded-block {
-        max-width: 95%;
-        width: 95%;
-        padding: 15px; /* Уменьшаем padding здесь */
-        margin: 0 auto 20px; /* Уменьшаем нижний margin */
-    }
-
-    .teacher-info p { /* Уменьшаем размер шрифта для заголовка ФИО преподавателя */
-        font-size: 16px;
-    }
-    .teacher-info span {
-        font-size: 18px; /* Уменьшаем размер шрифта для имени преподавателя */
-    }
-
-    .criteria {
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-bottom: 5px; /* Уменьшаем отступ между критериями */
-    }
-
-    .criteria label {
-        width: 100%;
-        text-align: left;
-        margin-bottom: 3px; /* Уменьшаем отступ */
-    }
-
-    .criteria input {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .rating {
-        width: 100%;
-        text-align: right;
-        margin-top: 3px; /* Уменьшаем отступ */
-        margin-left: 0;
-    }
-
-    textarea {
-        min-height: 100px; /* Уменьшаем минимальную высоту */
-        padding: 10px; /* Уменьшаем padding */
-        margin: 15px 0; /* Уменьшаем вертикальные отступы */
-        font-size: 14px; /* Уменьшаем размер шрифта */
-    }
-
-    .button {
-        padding: 10px; /* Уменьшаем padding */
-        font-size: 14px;
-        margin-top: 15px; /* Уменьшаем верхний отступ */
-    }
-}
-
-/* Для экранов шириной до 480px (например, большинство смартфонов) */
-@media (max-width: 480px) {
-    .profile-block-link {
-        padding: 5px 10px;
-        gap: 6px;
-    }
-    header { /* Дополнительная настройка хедера для маленьких экранов */
-        padding: 15px;
-    }
-    .profile-block-link {
-        margin-top: 10px; /* Добавляем небольшой отступ сверху, если элементы перенеслись */
-    }
-    .star-icon {
-        width: 16px;
-        height: 16px;
-    }
-
-    .average-rating {
-        font-size: 12px;
-    }
-
-    .avatar-image {
-        width: 30px;
-        height: 30px;
-    }
-
-    .logo {
-        width: 120px;
-    }
-
-    .rounded-block {
-        padding: 10px; /* Еще больше уменьшаем padding */
-        margin: 0 auto 10px; /* Еще уменьшаем нижний margin */
-    }
-
-    .teacher-info p {
-        font-size: 14px;
-    }
-    .teacher-info span {
-        font-size: 16px;
-    }
-
-    .criteria {
-        flex-direction: column; /* Располагаем метку, слайдер и рейтинг в колонку */
-        align-items: center; /* Центрируем по горизонтали, если они в колонке */
-        margin-bottom: 0px;
-    }
-    .criteria label, .criteria input, .rating {
-        font-size: 13px; /* Еще уменьшаем размер шрифта */
-    }
-
-    textarea {
-        min-height: 80px; /* Минимальная высота еще меньше */
-        padding: 8px; /* Еще уменьшаем padding */
-        margin: 10px 0; /* Еще уменьшаем вертикальные отступы */
-    }
-
-    .button {
-        padding: 8px; /* Еще уменьшаем padding */
-        font-size: 12px;
-        margin-top: 10px; /* Еще уменьшаем верхний отступ */
-    }
-}
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #00ECDC;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .slider:disabled::-webkit-slider-thumb {
+    cursor: default;
+  }
+  
+  .rating {
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    resize: vertical;
+  }
+  
+  .button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #00ECDC;
+    color: #1e1e1e;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+  .button:hover {
+    background-color: #00b9a5;
+  }
+  .button.secondary {
+    background-color: #444;
+    color: #ccc;
+  }
+  
+  .centered-review-block {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0
+  }
+  .centered-review-block {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .modal-box {
+    background: #1F2122;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    min-width: 260px;
+    max-width: 90%;
+  }

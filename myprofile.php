@@ -2,141 +2,121 @@
 session_start();
 require_once 'db.php';
 
-// 1. Устанавливаем роль по умолчанию
-if (!isset($_SESSION['role'])) {
-    $_SESSION['role'] = 'guest';
+$user_id = $_SESSION['user_id'] ?? null;
+$role = $_SESSION['role'] ?? 'guest';
+
+if (!$user_id || $role !== 'teacher') {
+  ?>
+  <!DOCTYPE html>
+  <html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="profile.css">
+  </head>
+  <body>
+    <div class="profile-page" style="text-align:center;">
+      <h1>Профиль недоступен</h1>
+      <p style="color:#ccc;">Данная страница доступна только для преподавателей.</p>
+      <a href="logout.php?redirect=index.php" class="button" style="margin-top:20px;">Войти в аккаунт</a>
+    </div>
+  </body>
+  </html>
+  <?php exit;
 }
 
-// 2. ADMIN: показываем простую страницу
-if ($_SESSION['role'] === 'admin') {
-    ?>
-    <!DOCTYPE html>
-    <html lang="ru">
-    <head><meta charset="UTF-8"><title>Профиль администратора</title></head>
-    <body>
-      <h1>Вы вошли как администратор</h1>
-      <p>Для управления системой перейдите в <a href="app.php">админ-панель</a>.</p>
-      <form action="logout.php" method="POST"><button>Выйти</button></form>
-    </body>
-    </html>
-    <?php exit;
-}
+$stmt = $conn->prepare("
+  SELECT t.*, u.name
+  FROM teachers t
+  JOIN users u ON u.id = t.user_id
+  WHERE u.id = ?
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$t = $stmt->get_result()->fetch_assoc();
+$stmt->close();
 
-// 3. Если пользователь → пробуем найти, есть ли он в таблице teachers
-$uid = $_SESSION['user_id'] ?? null;
-$teacher = null;
+$disciplines = [
+  'Программирование мобильных модулей',
+  'Основы алгоритмизации и программирования',
+  'Программирование на языке С++',
+  'Основы компьютерных сетей',
+  'Оптимизация и настройка ПК'
+];
 
-if ($_SESSION['role'] === 'user' && $uid) {
-    $stmt = $mysqli->prepare("SELECT id, name, photo, bio FROM teachers WHERE user_id = ?");
-    $stmt->bind_param('i', $uid);
-    $stmt->execute();
-    $teacher = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-}
+$stmt = $conn->prepare("SELECT crit1, crit2, crit3, crit4, crit5 FROM reviews WHERE teacher_id = ?");
+$stmt->bind_param("i", $t['id']);
+$stmt->execute();
+$result = $stmt->get_result();
+$stmt->close();
 
-function ratingColor($v) {
-    if ($v >= 4.51) return '#36F87D';
-    if ($v >= 3.0)  return '#F8B436';
-    return '#CF3232';
+$sum = [0,0,0,0,0]; $count = 0;
+while ($row = $result->fetch_assoc()) {
+  for ($i = 0; $i < 5; $i++) $sum[$i] += $row["crit".($i+1)];
+  $count++;
 }
+$avg = $count ? array_map(fn($v) => round($v / $count, 2), $sum) : ['–','–','–','–','–'];
+$overall = $count ? round(array_sum($avg) / 5, 2) : '–';
+$overallClass = is_numeric($overall) ? (
+    $overall >= 4.5 ? 'green' :
+    ($overall >= 3 ? 'yellow' : 'red')
+  ) : 'gray';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Мой профиль</title>
-  <style>
-    .slider { background:#eee; height:8px; border-radius:4px; margin-bottom:10px; }
-    .slider-fill { height:100%; }
-  </style>
+  <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-  <nav>
-    <a href="index.php">Главная</a> |
-    <form action="logout.php" method="POST" style="display:inline">
-      <button type="submit">Выйти</button>
-    </form>
-  </nav>
-  <hr>
 
-<?php if ($teacher): ?>
-  <h1><?= htmlspecialchars($teacher['name']) ?></h1>
-  <img src="<?= htmlspecialchars($teacher['photo']) ?>" alt="Фото" width="200"><br>
-  <p><?= nl2br(htmlspecialchars($teacher['bio'])) ?></p>
-
-  <?php
-    $stmt = $mysqli->prepare("
-      SELECT AVG(crit1) AS c1, AVG(crit2) AS c2, AVG(crit3) AS c3,
-             AVG(crit4) AS c4, AVG(crit5) AS c5
-      FROM reviews WHERE teacher_id = ?
-    ");
-    $stmt->bind_param('i', $teacher['id']);
-    $stmt->execute();
-    $avg = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-
-    $labels = [
-      'Знание предмета'    => round((float)$avg['c1'], 2),
-      'Качество изложения' => round((float)$avg['c2'], 2),
-      'Коммуникабельность' => round((float)$avg['c3'], 2),
-      'Справедливость'     => round((float)$avg['c4'], 2),
-      'Доступность'        => round((float)$avg['c5'], 2)
-    ];
-    $total = array_sum($labels) / count($labels);
-  ?>
-
-  <h2>Общий рейтинг: 
-    <span style="color:<?= ratingColor($total) ?>;">
-      <?= number_format($total,2) ?>
-    </span>
-  </h2>
-
-  <?php foreach ($labels as $label => $val): ?>
-    <p><?= $label ?>: 
-      <span style="color:<?= ratingColor($val) ?>;">
-        <?= $val ?>
-      </span>
-    </p>
-    <div class="slider">
-      <div class="slider-fill" style="
-        width: <?= $val * 20 ?>%;
-        background: <?= ratingColor($val) ?>;"></div>
+  <div class="top-actions">
+    <img src="images/logo.svg" alt="Логотип">
+    <div class="buttons">
+      <a href="main.html" class="back">← Назад</a>
+      <a href="logout.php" class="logout">Выйти</a>
     </div>
-  <?php endforeach; ?>
+  </div>
 
-  <h2>Отзывы студентов</h2>
-  <?php
-    $stmt = $mysqli->prepare("
-      SELECT content, created_at
-      FROM reviews
-      WHERE teacher_id = ?
-      ORDER BY created_at DESC
-    ");
-    $stmt->bind_param('i', $teacher['id']);
-    $stmt->execute();
-    $reviews = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-  ?>
+  <div class="profile-container">
+    <div class="profile-photo">
+      <img src="<?= htmlspecialchars($t['photo']) ?>" alt="Фото преподавателя">
+    </div>
 
-  <?php if (empty($reviews)): ?>
-    <p>Отзывов пока нет.</p>
-  <?php else: ?>
-    <?php foreach ($reviews as $r): ?>
-      <blockquote>
-        <p><?= nl2br(htmlspecialchars($r['content'])) ?></p>
-        <small><?= $r['created_at'] ?></small>
-      </blockquote>
-    <?php endforeach; ?>
-  <?php endif; ?>
+    <div class="profile-details">
+      <h1><?= htmlspecialchars($t['name']) ?></h1>
+      <p><strong>Образование:</strong> среднее-профессиональное</p>
+      <p><strong>Квалификация:</strong> техник-программист</p>
+      <p><strong>Направление:</strong> 09.02.03 Программирование в компьютерных системах</p>
+      <p><strong>Стаж:</strong> общий – 2 года, по специальности – 2 года</p>
 
-<?php else: ?>
-  <h1>Вы вошли как «Гость»</h1>
-  <p>Вы просматриваете систему как гость. Доступны следующие действия:</p>
-  <ul>
-    <li><a href="index.php">Войти как преподаватель</a></li>
-    <li><a href="academics.html">Посмотреть преподавателей</a></li>
-  </ul>
-<?php endif; ?>
+      <p><strong>Преподаваемые дисциплины:</strong></p>
+      <ul>
+        <?php foreach ($disciplines as $d): ?>
+          <li><?= $d ?></li>
+        <?php endforeach; ?>
+      </ul>
+
+      <p><strong>Общий рейтинг:</strong> <span class="score <?= $overallClass ?>"><?= $overall ?></span></p>
+
+      <?php
+        $labels = ['Знание предмета','Качество написания','Адекватность','Своевременность','Доступность'];
+        foreach ($avg as $i => $val):
+          $percent = is_numeric($val) ? $val * 20 : 0;
+          $class = is_numeric($val) ? (
+              $val >= 4.5 ? 'green' :
+              ($val >= 3 ? 'yellow' : 'red')
+            ) : 'gray';
+      ?>
+      <div class="rating-line <?= $class ?>">
+        <div class="score"><?= is_numeric($val) ? $val : '–' ?></div>
+        <div class="bar"><div style="width: <?= $percent ?>%"></div></div>
+        <span><?= $labels[$i] ?></span>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
 
 </body>
 </html>

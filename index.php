@@ -2,34 +2,32 @@
 session_start();
 require_once 'db.php';
 
-// Если уже залогинен — сразу уходим
+// 🔐 Редирект по ролям
 if (!empty($_SESSION['role'])) {
     if ($_SESSION['role'] === 'admin') {
         header('Location: app.php');
-    } else {
+        exit;
+    } elseif ($_SESSION['role'] === 'teacher' || $_SESSION['role'] === 'user') {
         header('Location: main.html');
+        exit;
     }
-    exit;
+    // guest → остаётся на форме
 }
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Гостевой вход без валидации HTML
     if (isset($_POST['guest'])) {
-        $_SESSION['role']    = 'guest';
+        $_SESSION['role'] = 'guest';
         $_SESSION['user_id'] = null;
         header('Location: main.html');
         exit;
     }
 
-    // Обычная авторизация
-    $email = trim($_POST['email']   ?? '');
-    $pass  =          $_POST['password'] ?? '';
+    $email = trim($_POST['email'] ?? '');
+    $pass  = $_POST['password'] ?? '';
 
     if ($email && $pass) {
-        $stmt = $mysqli->prepare(
-          "SELECT id, password, role FROM users WHERE email = ?"
-        );
+        $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $user = $stmt->get_result()->fetch_assoc();
@@ -37,9 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user && password_verify($pass, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role']    = $user['role']; // admin или user
+            $_SESSION['role'] = $user['role'];
 
-            // Редирект по роли
             if ($user['role'] === 'admin') {
                 header('Location: app.php');
             } else {
@@ -49,34 +46,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $error = 'Неверные учетные данные';
+    $error = 'Неверный email или пароль';
 }
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Авторизация</title>
+  <title>Вход</title>
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
-  <h1>Вход в систему</h1>
-  <?php if ($error): ?>
-    <p style="color:red"><?= htmlspecialchars($error) ?></p>
-  <?php endif; ?>
-  <form method="POST">
-    <label>
-      Email:<br>
-      <input type="email" name="email" required>
-    </label><br><br>
-    <label>
-      Пароль:<br>
-      <input type="password" name="password" required>
-    </label><br><br>
+  <div class="login-box">
+    <div class="logo">
+      <img src="images/logo.svg" alt="Логотип">
+    </div>
 
-    <button type="submit">Войти</button>
-    <button type="submit" name="guest" formnovalidate>
-      Войти как гость
-    </button>
-  </form>
+    <?php if (!empty($error)): ?>
+      <div class="error-message"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+
+    <form method="POST">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Пароль" required>
+      <button type="submit">Войти</button>
+      <button type="submit" name="guest" formnovalidate>Войти как гость</button>
+    </form>
+
+    <div class="note">Авторизуйтесь, чтобы получить доступ к оценкам и управлению.</div>
+  </div>
 </body>
 </html>
