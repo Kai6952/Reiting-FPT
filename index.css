@@ -1,0 +1,165 @@
+body{
+    background-color: #1e1e1e;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+a, p, label, img, span{
+    user-select: none;
+}
+
+.rounded-block{
+    position: relative;
+    width: 90%;
+    max-width: 1142px;
+    height: auto;
+    min-height: 442px;
+    border-radius: 40px;
+    background-color: #1F2122;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирует основные элементы по горизонтали */
+    justify-content: center;
+    gap: 20px;
+}
+
+.block-text, .input-field, .login-button {
+    position: static;
+    margin: 0;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+}
+
+.logo{
+    max-width: 300px; /* Увеличиваем максимальный размер логотипа */
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    /* align-self: flex-start; */ /* Это выровняет логотип по левому краю внутри flex-контейнера */
+    /* Вместо align-self: flex-start, мы можем использовать margin-right: auto для выталкивания влево */
+    margin-right: auto; /* Выталкивает логотип влево, если align-items: center у родителя */
+    margin-left: 20px; /* Небольшой отступ слева, чтобы не прилипало к краю */
+    /* Или можно установить конкретный margin-left, чтобы сместить его больше */
+    /* Например: margin-left: 5%; */
+}
+
+.block-text{
+    font-size: 4vw;
+    max-font-size: 64px;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-field{
+    width: 80%;
+    max-width: 506px;
+    height: 52px;
+    border: none;
+    border-radius: 7.83px;
+    padding: 10px 20px;
+    background-color: #1A1A1A;
+    color: #ffffff;
+}
+.input-field:focus{
+    outline: 2px solid #585858;
+}
+
+#password{
+    margin-bottom: 20px;
+}
+
+.login-button{
+    width: 150px;
+    height: 59px;
+    border-radius: 20px;
+    background-color: #00ECDC;
+    color: #303031;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+    margin-top: 20px;
+}
+
+.login-button:hover{
+    background-color: #008a81;
+}
+
+@media (max-width: 768px) {
+    .rounded-block {
+        width: 95%;
+        min-height: 400px;
+        padding: 15px;
+    }
+
+    .block-text {
+        font-size: 6vw;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        max-width: 200px; /* Корректировка размера для планшетов */
+        margin-bottom: 15px;
+        margin-left: 15px; /* Корректировка отступа для планшетов */
+    }
+
+    .input-field {
+        width: 90%;
+    }
+
+    .login-button {
+        width: 140px;
+        font-size: 18px;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rounded-block {
+        width: 95%;
+        border-radius: 20px;
+        min-height: 350px;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .block-text {
+        font-size: 8vw;
+        margin-bottom: 15px;
+    }
+
+    .logo {
+        max-width: 120px; /* Корректировка размера для мобильных */
+        margin-bottom: 10px;
+        margin-left: 10px; /* Корректировка отступа для мобильных */
+    }
+
+    .input-field {
+        width: 95%;
+        height: 45px;
+        padding: 8px 15px;
+    }
+
+    .login-button {
+        width: 120px;
+        height: 50px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reit.css">
+    <title>Рейтинг</title>
+</head>
+<body>
+    <header> 
+        <img src="logo/NORM logo.svg" alt="Логотип" class="logo original">
+        <img src="logo/adaptive-logo.svg" alt="Логотип" class="logo adaptive">
+        <a class="profile-block-link" href="golova.html">
+            <div class="profile-rating">
+                <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .587l3.668 7.568 8.332 1.209-6.001 5.852 1.416 8.291L12 18.895l-7.415 3.895 1.416-8.291-6.001-5.852 8.332-1.209z"/>
+                </svg>
+                <span class="average-rating">4.94</span> </div>
+            <img src="photo/golovan.jpg" alt="Аватар пользователя" class="avatar-image">
+        </a>
+    </header>
+
+    <div class="rounded-block">
+        <div class="teacher-info"> 
+            <p class="teacher-title"> ФИО преподавателя</p>
+            <span class="teacher-name">Сейтеминова Мева Исаевна</span>
+        </div>
+
+        <div class="criteria-container">
+            <div class="criteria">
+                <label for="knowledge">Знание предмета:</label>
+                <input type="range" id="knowledge" class="slider" min="0" max="5" value="0">
+                <p class="rating" id="knowledge-rating">0</p>
+            </div>
+    
+            <div class="criteria">
+                <label for="presentation">Качество изложения:</label>
+                <input type="range" id="presentation" class="slider" min="0" max="5" value="0">
+                <p class="rating" id="presentation-rating">0</p>
+            </div>
+    
+            <div class="criteria">
+                <label for="communication">Коммуникабельность:</label>
+                <input type="range" id="communication" class="slider" min="0" max="5" value="0">
+                <p class="rating" id="communication-rating">0</p>
+            </div>
+    
+            <div class="criteria">
+                <label for="fairness">Справедливость:</label>
+                <input type="range" id="fairness" class="slider" min="0" max="5" value="0">
+                <p class="rating" id="fairness-rating">0</p>
+            </div>
+    
+            <div class="criteria">
+                <label for="availability">Доступность:</label>
+                <input type="range" id="availability" class="slider" min="0" max="5" value="0">
+                <p class="rating" id="availability-rating">0</p>
+            </div>
+        </div>
+
+        <textarea placeholder="Ваш отзыв"></textarea>
+        <button class="button">Отправить отзыв</button>
+    </div>
+
+    <script>
+        const sliders = document.querySelectorAll('.slider');
+
+        sliders.forEach(slider => {
+            slider.addEventListener('input', function() {
+                const ratingId = this.id + '-rating';
+                document.getElementById(ratingId).textContent = this.value;
+
+                // Добавляем изменение цвета
+                const value = parseInt(this.value);
+                let color = '';
+
+                switch (value) {
+                case 1:
+                    color = '#CF3232';
+                    break;
+                case 2:
+                    color = '#F37412';
+                    break;
+                case 3:
+                    color = '#F8B436';
+                    break;
+                case 4:
+                    color = '#6EE022';
+                    break;
+                case 5:
+                    color = '#36F87D';
+                    break;
+                }
+
+                this.style.background = color;
+                changeSliderThumbColor(slider);
+            });
+            function changeSliderThumbColor(slider) {
+                const value = parseInt(slider.value);
+                let colort = '';
+
+                // Определяем цвет в зависимости от значения
+                switch (value) {
+                    case 1:
+                    colort = '#fff'; // Красный
+                    break;
+                    case 2:
+                    colort = '#fff'; // Оранжевый
+                    break;
+                    case 3:
+                    colort = '#fff'; // Желтый
+                    break;
+                    case 4:
+                    colort = '#fff'; // Зеленый
+                    break;
+                    case 5:
+                    colort = '#fff'; // Синий
+                    break;
+                    default:
+                    colort = '#454545'; // Синий (по умолчанию)
+                    break;
+                }
+
+                // Применяем цвет к ползунку
+                slider.style.setProperty('--thumb-color', colort);
+                slider.style.setProperty('--moz-thumb-color', colort);
+                }
+        });
+    </script>
+</body>
+</html>

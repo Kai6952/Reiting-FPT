@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="asd.css">
+    <title>Страница с макетом</title>
+</head>
+<body>
+    <header> 
+        <img src="logo/NORM logo.svg" alt="Логотип" class="logo original">
+        <img src="logo/adaptive-logo.svg" alt="Логотип" class="logo adaptive">
+        <a class="profile-block-link" href="golova.html">
+            <div class="profile-rating">
+                <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .587l3.668 7.568 8.332 1.209-6.001 5.852 1.416 8.291L12 18.895l-7.415 3.895 1.416-8.291-6.001-5.852 8.332-1.209z"/>
+                </svg>
+                <span class="average-rating">4.94</span> </div>
+            <img src="photo/golovan.jpg" alt="Аватар пользователя" class="avatar-image">
+        </a>
+    </header>
+
+    <a class="back" href="academics.html">Вернуться</a>
+
+    <div class="rounded-block">
+        <div class="content-block">
+            <img class="photo" src="photo/sejtiminova-meva-isaevna.jpg" alt="мева" width="250" height="357">
+            <div class="info-block">
+                <h1>Сейтиминова Мева Исаевна</h1>
+                <p>Образование: <span>высшее</span>
+                    <br>
+                    Квалификация: <span>экономист-математик</span>
+                    <br>
+                    Направление подготовки: <span>«Экономическая кибернетика»</span></p>
+                <p>Стаж работы: общий: <span>45 лет; педагогический: 31 год</span></p>
+                <p>Читаемые дисциплины: <span><br> — «Дискретная математика с элементами математической логики»,
+                   <br> — «Системное программирование»,
+                   <br> — «Инструментальные средства разработки программного обеспечения».</span>
+</p>
+            </div>
+        </div>
+    
+            <div class="rating">
+                <p>Общий рейтинг: <span class="rating-value" id="totalRating"></span></p>
+            </div>
+    
+            <div class="criteria-container">
+                <p class="krit">Знание предмета:</p>
+                <div class="criteria">
+                    <span class="criteria-value" id="criteria1Value"></span>
+                    <div class="slider">
+                        <div class="slider-fill" id="criteria1Fill"></div>
+                    </div>
+                </div>  
+                <p class="krit">Качество изложения:</p>  
+                <div class="criteria">
+                    <span class="criteria-value" id="criteria2Value"></span>
+                    <div class="slider">
+                        <div class="slider-fill" id="criteria2Fill"></div>
+                    </div>                   
+                </div>
+                <p class="krit">Коммуникабельность:</p>
+                <div class="criteria">
+                    <span class="criteria-value" id="criteria3Value"></span>
+                    <div class="slider">
+                        <div class="slider-fill" id="criteria3Fill"></div>
+                    </div>
+                </div>
+                <p class="krit">Справедливость:</p>
+                <div class="criteria">
+                    <span class="criteria-value" id="criteria4Value"></span>
+                    <div class="slider">
+                        <div class="slider-fill" id="criteria4Fill"></div>
+                    </div>
+                </div>
+                <p class="krit">Доступность:</p>
+                <div class="criteria"> 
+                    <span class="criteria-value" id="criteria5Value"></span>
+                    <div class="slider">
+                        <div class="slider-fill" id="criteria5Fill"></div>
+                    </div>
+                </div>
+            </div>
+            
+    
+            <button class="review-button" onclick="window.location.href = 'reit.html';">Оставить отзыв</button>
+    </div>
+
+    <script>
+        const criteriaData = [4.2, 3.5, 4.8, 3.1, 1.9];
+
+        function setRatingColor(value, element) {
+            if (value >= 4.51) {
+                element.style.color = "#36F87D";
+            } else if (value >= 3) {
+                element.style.color = "#F8B436";
+            } else {
+                element.style.color = "#CF3232";
+            }
+        }
+
+        function updateCriteria(data) {
+            let total = 0;
+            for (let i = 0; i < data.length; i++) {
+                const value = data[i];
+                total += value;
+
+                const valueElement = document.getElementById(`criteria${i + 1}Value`);
+                const fillElement = document.getElementById(`criteria${i + 1}Fill`);
+
+                valueElement.textContent = value.toFixed(2);
+                fillElement.style.width = `${value * 20}%`;
+
+                setRatingColor(value, valueElement);
+                fillElement.style.backgroundColor = valueElement.style.color;
+            }
+
+            const averageRating = total / data.length;
+            const ratingElement = document.getElementById("totalRating");
+            ratingElement.textContent = averageRating.toFixed(2);
+            setRatingColor(averageRating, ratingElement);
+        }
+
+        updateCriteria(criteriaData);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,653 @@
+body {
+    background-color: #1e1e1e;
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+header {
+    padding: 30px;
+    display: flex; /* Изменено с inline-flex на flex */
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%; /* Устанавливаем 100% для адаптивности */
+    max-width: 1442px; /* Ограничиваем максимальную ширину как в main.css */
+    margin: 0 auto; /* Центрируем хедер */
+    box-sizing: border-box; /* Добавлено для корректной работы padding с width: 100% */
+}
+
+.back {
+    color: #C0C0C0;
+    text-align: center;
+    align-content: center;
+    height: fit-content;
+    margin: 20px 40px;
+    padding: 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.back:hover {
+    color: #fff;
+    font-weight: 600;
+}
+
+.profile-block-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #303031;
+    border-radius: 25px;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+    height: fit-content;
+}
+
+.profile-block-link:hover {
+    background-color: #454545;
+}
+
+.profile-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.star-icon {
+    width: 20px;
+    height: 20px;
+    fill: #FFD700;
+}
+
+.average-rating {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.avatar-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00ECDC;
+    object-position: center 10%;
+}
+
+/* Изменения для логотипа: по умолчанию большой логотип */
+.logo {
+    width: 300px;
+    height: auto;
+}
+
+.logo.adaptive {
+    display: none;
+}
+
+.button { /* Этот класс отсутствует в HTML-файле meva.html, но оставлен для полноты */
+    position: absolute;
+    right: 29px;
+    top: 68px;
+    width: 166px;
+    height: 29px;
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    line-height: 29px;
+    /* Возможно, потребуется перепозиционирование в медиазапросах, если он будет использоваться */
+}
+
+.rounded-block {
+    position: relative;
+    margin: 70px auto; /* Центрируем блок, делаем отступы адаптивными */
+    padding: 30px;
+    align-content: center;
+    justify-content: center;
+    width: 80%; /* Увеличена ширина для лучшей адаптивности на средних экранах */
+    max-width: 1000px; /* Ограничиваем максимальную ширину */
+    height: fit-content;
+    border-radius: 40px;
+    background-color: #1F2122;
+    box-sizing: border-box; /* Добавлено для корректной работы padding с width */
+}
+
+.content-block {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    box-sizing: border-box;
+    justify-content: center; /* Центрируем элементы внутри блока */
+    align-items: flex-start; /* Выравниваем по верху */
+    gap: 30px; /* Отступ между фото и инфо-блоком */
+}
+
+.photo {
+    border-radius: 15px;
+    width: 250px; /* Изначальный размер */
+    height: 357px; /* Изначальный размер */
+    object-fit: cover;
+    flex-shrink: 0; /* Предотвращает сжатие изображения */
+}
+
+.info-block {
+    width: calc(100% - 250px - 30px); /* Адаптивная ширина, учитывая фото и gap */
+    min-width: 300px; /* Минимальная ширина, чтобы текст не сильно сжимался */
+    height: fit-content; /* Изменено с фиксированной высоты */
+    color: #fff;
+    margin-left: 0; /* Убираем фиксированный margin-left */
+    flex-grow: 1; /* Позволяет блоку занимать оставшееся пространство */
+}
+
+.info-block h1 {
+    color: #00ECDC;
+    margin-top: 0; /* Убираем стандартный отступ сверху у h1 */
+}
+
+.info-block span {
+    color: #a5a5a5;
+}
+
+.rating {
+    margin: 20px 70px; /* Сохраняем отступы для больших экранов */
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.criteria-container {
+    margin: 10px 30px;
+}
+
+.criteria {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 0;
+    flex-wrap: wrap; /* Позволяет элементам переноситься */
+    gap: 10px; /* Отступ между элементами критериев */
+}
+
+.criteria-value {
+    position: relative;
+    margin: 0; /* Убираем жёсткий маржин */
+    font-weight: 600;
+    flex-shrink: 0; /* Не сжимать значение */
+    width: 50px; /* Фиксированная ширина для значений */
+    text-align: center;
+}
+
+.slider {
+    margin-top: 0px;
+    width: calc(100% - 70px); /* Адаптивная ширина, учитывая значение */
+    max-width: 500px; /* Ограничиваем максимальную ширину слайдера */
+    height: 30px;
+    background-color: #333333;
+    border-radius: 10px;
+    flex-grow: 1; /* Позволяет слайдеру занимать доступное пространство */
+}
+
+.slider-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+    background-color: #000;
+    border-radius: 10px;
+}
+
+.krit {
+    margin: 10px 40px;
+    padding: 0;
+    color: #C0C0C0;
+}
+
+.review-button {
+    background-color: #00ECDC;
+    color: #303031;
+    text-align: center;
+    align-content: center;
+    margin: 50px auto 20px; /* Центрируем кнопку */
+    display: block; /* Делаем блочным элементом для margin: auto */
+    height: fit-content;
+    width: 180px; /* Немного увеличена ширина для лучшего вида */
+    padding: 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.5s;
+    border: none;
+}
+
+.review-button:hover {
+    background-color: #008a81;
+}
+
+.reviews-container {
+    margin: 50px auto; /* Отступы сверху/снизу и центрирование */
+    padding: 0 20px; /* Горизонтальные отступы */
+    width: 80%; /* Ширина контейнера отзывов */
+    max-width: 1000px; /* Максимальная ширина, соответствует .rounded-block */
+    display: flex;
+    flex-wrap: wrap; /* Позволяет отзывам переноситься на новую строку */
+    justify-content: center; /* Центрируем отзывы внутри контейнера */
+    gap: 30px; /* Отступ между отзывами */
+    box-sizing: border-box;
+}
+
+.review-block {
+    background-color: #1F2122; /* Цвет фона такой же, как у основного блока */
+    border-radius: 20px;
+    padding: 25px;
+    width: calc(50% - 15px); /* Ширина каждого отзыва (по 2 в ряд с учетом gap) */
+    box-sizing: border-box;
+    flex-shrink: 0; /* Предотвращает сжатие */
+    min-width: 300px; /* Минимальная ширина отзыва для мобильных */
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.review-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Делаем аватарку круглой */
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #00ECDC; /* Тонкая рамка вокруг аватарки */
+}
+
+.review-author {
+    color: #00ECDC;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.review-text {
+    color: #C0C0C0;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+/* --- Медиазапросы для адаптивности --- */
+
+/* Для больших экранов (десктопов) */
+@media (min-width: 1200px) {
+    header {
+        padding: 30px;
+        width: 1142px; /* Ширина хедера как в main.css */
+        margin: 0 auto; /* Центрируем хедер */
+    }
+
+    .rounded-block {
+        margin: 70px auto;
+        width: 60%;
+        max-width: 1000px;
+    }
+
+    .info-block {
+        width: calc(100% - 250px - 30px); /* Пересчет ширины для больших экранов */
+        margin-left: 0; /* Отступ регулируется gap */
+    }
+
+    .rating {
+        margin: 20px 70px;
+    }
+
+    .review-button {
+        margin: 50px 20px 20px 80%; /* Возвращаем оригинальное позиционирование для больших экранов */
+        display: inline-block; /* Возвращаем inline-block для оригинального позиционирования */
+        width: 150px;
+    }
+}
+
+/* Для планшетов (от 768px до 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+    header {
+        padding: 20px;
+        width: 95%; /* Адаптивная ширина */
+        max-width: 95%;
+    }
+
+     .reviews-container {
+        width: 90%;
+        gap: 20px;
+        margin: 30px auto;
+    }
+
+    .review-block {
+        width: calc(50% - 10px); /* Адаптация ширины для планшетов */
+        padding: 20px;
+        min-width: 280px;
+    }
+
+    .review-avatar {
+        width: 45px;
+        height: 45px;
+        margin-right: 12px;
+    }
+
+    .review-author {
+        font-size: 1.1em;
+    }
+
+    .review-text {
+        font-size: 0.9em;
+    }
+
+    .logo {
+        width: 250px;
+    }
+
+    .profile-block-link {
+        padding: 6px 12px;
+    }
+
+    .avatar-image {
+        width: 35px;
+        height: 35px;
+    }
+
+    .star-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .average-rating {
+        font-size: 14px;
+    }
+
+    .back {
+        margin: 15px 30px;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .rounded-block {
+        margin: 40px auto;
+        padding: 25px;
+        width: 90%;
+    }
+
+    .content-block {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .photo {
+        width: 200px;
+        height: 286px;
+    }
+
+    .info-block {
+        width: calc(100% - 200px - 20px);
+        min-width: unset;
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .info-block h1 {
+        font-size: 1.8em;
+    }
+
+    .rating {
+        margin: 15px 40px;
+        font-size: 20px;
+    }
+
+    .criteria-container {
+        margin: 10px 20px;
+    }
+
+    .criteria {
+        gap: 8px;
+    }
+
+    .criteria-value {
+        width: 40px;
+        font-size: 14px;
+    }
+
+    .slider {
+        width: calc(100% - 60px);
+        height: 25px;
+    }
+
+    .krit {
+        margin: 8px 25px;
+        font-size: 14px;
+    }
+
+    .review-button {
+        margin: 40px auto 15px;
+        width: 160px;
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* Для мобильных устройств (менее 768px) */
+@media (max-width: 767px) {
+    header {
+        padding: 10px 15px;
+        height: auto;
+        width: 96%; /* Адаптивная ширина */
+        box-sizing: border-box;
+    }
+
+        .reviews-container {
+        width: 95%;
+        flex-direction: column; /* Отзывы в колонку на мобильных */
+        align-items: center; /* Центрируем отзывы */
+        gap: 20px;
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .review-block {
+        width: 100%; /* Каждый отзыв занимает всю доступную ширину */
+        padding: 15px;
+        min-width: unset; /* Убираем минимальную ширину */
+    }
+
+    .review-avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .review-author {
+        font-size: 1em;
+    }
+
+    .review-text {
+        font-size: 0.85em;
+    }
+
+    .logo.original { /* Скрываем оригинальный логотип */
+        display: none;
+    }
+
+    .logo.adaptive { /* Показываем адаптивный логотип */
+        display: block;
+        width: 120px;
+    }
+
+    .profile-block-link {
+        padding: 5px 10px;
+        gap: 5px;
+    }
+
+    .avatar-image {
+        width: 30px;
+        height: 30px;
+    }
+
+    .star-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .average-rating {
+        font-size: 12px;
+    }
+
+    .back {
+        margin: 10px 20px;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .rounded-block {
+        margin: 20px auto;
+        padding: 15px;
+        width: 95%;
+        border-radius: 20px;
+    }
+
+    .content-block {
+        flex-direction: column; /* Элементы в колонку */
+        align-items: center;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .photo {
+        width: 150px;
+        height: 214px;
+        margin-bottom: 10px;
+    }
+
+    .info-block {
+        width: 100%;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .info-block h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        text-align: center; /* Имя преподавателя по центру */
+    }
+    
+    .info-block p {
+        margin-bottom: 5px;
+    }
+
+    .rating {
+        margin: 10px 20px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .criteria-container {
+        margin: 10px;
+    }
+
+    .criteria {
+        flex-direction: row;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .criteria-value {
+        width: 30px;
+        font-size: 12px;
+    }
+
+    .slider {
+        width: calc(100% - 50px);
+        height: 20px;
+    }
+
+    .krit {
+        margin: 5px 15px;
+        font-size: 12px;
+    }
+
+    .review-button {
+        margin: 20px auto 10px;
+        width: 140px;
+        padding: 10px;
+        font-size: 12px;
+    }
+}
+
+/* Дополнительный медиазапрос для самых маленьких экранов, если нужно */
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+    }
+
+    .reviews-container {
+        gap: 15px;
+    }
+    .review-block {
+        padding: 12px;
+    }
+    .review-avatar {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+    }
+    .review-author {
+        font-size: 0.9em;
+    }
+    .review-text {
+        font-size: 0.8em;
+    }
+
+    .profile-block-link {
+        padding: 5px 8px;
+        gap: 5px;
+        margin-top: 5px;
+    }
+
+    .star-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .average-rating {
+        font-size: 10px;
+    }
+
+    .avatar-image {
+        width: 28px;
+        height: 28px;
+    }
+
+    .rounded-block {
+        margin: 15px auto;
+        padding: 10px;
+        width: 98%;
+    }
+
+    .info-block h1 {
+        font-size: 1.3em;
+    }
+
+    .info-block {
+        font-size: 12px;
+    }
+
+    .rating {
+        font-size: 16px;
+    }
+
+    .review-button {
+        width: 120px;
+        padding: 8px;
+        font-size: 11px;
+    }
+}

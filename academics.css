@@ -1,0 +1,333 @@
+body {
+    background-color: #1e1e1e;
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+header {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+a, p, label, img, span {
+    user-select: none;
+    text-decoration: none;
+}
+
+.profile-block-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #303031;
+    border-radius: 25px;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+    height: fit-content;
+}
+
+.profile-block-link:hover {
+    background-color: #454545;
+}
+
+.profile-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.star-icon {
+    width: 20px;
+    height: 20px;
+    fill: #FFD700;
+}
+
+.average-rating {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.avatar-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00ECDC;
+    object-position: center 10%;
+}
+
+/* Изменения для логотипа */
+.logo.original {
+    width: 300px;
+    height: auto;
+}
+
+.logo.adaptive {
+    display: none;
+    width: 150px;
+    height: auto;
+}
+
+.academics-l-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.academics-l-link {
+    margin: 15px;
+    border-radius: 40px;
+    transition: 0.5s;
+    width: 100%;
+    max-width: 1142px;
+}
+
+.academics-l-link:hover {
+    -webkit-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    transform: scale(1.01);
+}
+
+.academics-l-item {
+    position: relative;
+    display: flex; /* Сохраняем flex для ряда */
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    border-radius: 40px;
+    background-color: #1F2122;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 15px; /* Добавлен отступ между изображением и текстом */
+}
+
+.img img, .img1 {
+    background-color: white;
+    width: 150px;
+    height: 200px;
+    margin: 0; /* Удалены жёсткие маржи */
+    border-radius: 23px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.academic-t-container {
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+.academic-t-container h2 {
+    color: #00ECDC;
+    font-size: 1.2em;
+    margin-top: 0; /* Убрал лишний верхний отступ */
+}
+
+.back {
+    color: #C0C0C0;
+    text-align: center;
+    align-content: center;
+    height: fit-content;
+    margin: 20px 40px;
+    padding: 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.back:hover {
+    color: #fff;
+    font-weight: 600;
+}
+
+.discipline {
+    color: #a5a5a5;
+    font-size: 0.9em;
+}
+
+
+/* --- Медиазапросы для адаптивности --- */
+
+/* Для больших экранов (десктопов) */
+@media (min-width: 1200px) {
+    header {
+        padding: 30px;
+        margin: 0 auto;
+    }
+
+    .academics-l-container {
+        margin: 20px auto;
+        width: 1200px;
+    }
+
+    .academics-l-link {
+        margin: 20px;
+    }
+
+    .academics-l-item {
+        width: 1142px;
+    }
+
+    .img img, .img1 {
+        width: 200px;
+        height: 250px;
+        margin: 0; /* Сброс маржи, теперь используем gap в item */
+    }
+
+    .academic-t-container {
+        font-size: 24px;
+    }
+}
+
+/* Для планшетов (от 768px до 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+    header {
+        padding: 20px;
+    }
+
+    .logo.original {
+        width: 250px;
+    }
+
+    .profile-block-link {
+        padding: 6px 12px;
+    }
+
+    .avatar-image {
+        width: 35px;
+        height: 35px;
+    }
+
+    .star-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .average-rating {
+        font-size: 14px;
+    }
+
+    .academics-l-container {
+        width: 95%;
+        margin: 15px auto;
+    }
+
+    .academics-l-link {
+        margin: 10px;
+    }
+
+    .academics-l-item {
+        /* flex-direction: row; - Это значение по умолчанию для flex, сохраняем ряд */
+        padding: 15px;
+        gap: 10px; /* Уменьшаем отступ для планшетов */
+    }
+
+    .img img, .img1 {
+        width: 120px;
+        height: 150px;
+        /* margin: 15px; - Удалены жёсткие маржи */
+    }
+
+    .academic-t-container {
+        font-size: 18px;
+    }
+
+    .academic-t-container h2 {
+        font-size: 1.1em;
+    }
+
+    .discipline {
+        font-size: 0.85em;
+    }
+}
+
+/* Для мобильных устройств (менее 768px) */
+@media (max-width: 767px) {
+    header {
+        padding: 10px;
+    }
+
+    .logo.original {
+        display: none;
+    }
+
+    .logo.adaptive {
+        display: block;
+    }
+
+    .profile-block-link {
+        padding: 4px 8px; /* Еще меньше padding */
+        gap: 5px;
+    }
+
+    .avatar-image {
+        width: 28px;
+        height: 28px;
+    }
+
+    .star-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .average-rating {
+        font-size: 11px;
+    }
+
+    .academics-l-container {
+        width: 95%;
+        margin: 10px auto;
+        /* flex-direction: column; - Убрано, чтобы сохранить изначальное позиционирование */
+    }
+
+    .academics-l-link {
+        margin: 8px 0; /* Немного уменьшил отступы */
+        width: 100%;
+    }
+
+    .academics-l-item {
+        /* flex-direction: column; - Убрано, сохраняем ряд */
+        padding: 10px; /* Уменьшаем padding */
+        gap: 5px; /* Уменьшаем отступ */
+    }
+
+    .img img, .img1 {
+        width: 80px; /* Значительно уменьшаем изображение */
+        height: 100px;
+        /* margin: 0 0 15px 0; - Убрано, используем gap */
+    }
+
+    .academic-t-container {
+        font-size: 14px; /* Уменьшаем размер шрифта */
+        text-align: left; /* Возвращаем выравнивание влево */
+    }
+
+    .academic-t-container h2 {
+        font-size: 0.9em;
+    }
+
+    .discipline {
+        font-size: 0.75em;
+    }
+
+    .back {
+        margin: 10px 15px; /* Уменьшаем отступы */
+        padding: 8px;
+        font-size: 12px;
+    }
+}

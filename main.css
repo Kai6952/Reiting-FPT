@@ -1,0 +1,533 @@
+body{
+    background-color: #1e1e1e;
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+header{
+    padding: 30px;
+    display: flex; /* Изменено с inline-flex на flex */
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 1142px; /* Изменено для соответствия format-container */
+    margin: 0 auto; /* Центрируем хедер */
+}
+
+a, p, label, img, span{
+    user-select: none;
+}
+
+.section-divider {
+    text-align: center;
+    margin: 40px auto; /* Центрируем разделитель и даем отступы */
+    color: #C0C0C0; /* Цвет текста */
+    font-size: 24px; /* Размер шрифта */
+    font-weight: 600; /* Жирность шрифта */
+    max-width: 1142px; /* Соответствует ширине format-container */
+    width: 100%; /* Занимает всю доступную ширину */
+    position: relative; /* Необходимо для псевдоэлемента */
+    box-sizing: border-box;
+}
+
+.section-divider p {
+    margin: 0; /* Убираем стандартные отступы у параграфа */
+    padding: 0 20px; /* Небольшой горизонтальный отступ */
+    position: relative;
+    display: inline-block; /* Позволяет фону быть только вокруг текста */
+    background-color: #1e1e1e; /* Цвет фона, чтобы перекрыть линию */
+    z-index: 1;
+}
+
+
+.profile-block-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* Отступ между элементами */
+    background-color: #303031; /* Темнее, чем фон #1e1e1e */
+    border-radius: 25px; /* Закругленные края */
+    padding: 8px 15px; /* Внутренние отступы */
+    text-decoration: none; /* Убираем подчеркивание ссылки */
+    color: #ffffff; /* Цвет текста */
+    transition: background-color 0.3s ease; /* Плавный переход при наведении */
+    height: fit-content; /* Чтобы высота подстраивалась под содержимое */
+}
+
+.profile-block-link:hover {
+    background-color: #454545; /* Цвет при наведении */
+}
+
+.profile-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Отступ между звездой и рейтингом */
+    font-weight: 600;
+}
+
+.star-icon {
+    width: 20px; /* Размер звездочки */
+    height: 20px;
+    fill: #FFD700; /* Цвет звездочки (золотой) */
+}
+
+.average-rating {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.avatar-image {
+    width: 40px; /* Размер аватарки */
+    height: 40px;
+    border-radius: 50%; /* Делаем аватарку круглой */
+    object-fit: cover; /* Обрезка изображения для заполнения круга */
+    border: 2px solid #00ECDC; /* Тонкая бирюзовая рамка */
+    object-position: center 10%;
+}
+
+/* Изменения для логотипа: по умолчанию большой логотип */
+.logo { /* Сделаем его адаптивным */
+    width: 300px; /* Изначальный размер */
+    height: auto;
+}
+
+.logo.adaptive{
+    display: none;
+}
+
+a{
+    background-color: #00ECDC;
+    color: #303031;
+    text-align: center;
+    align-content: center;
+    height: fit-content;
+    padding: 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.format-container {
+    width: 1142px;
+    margin: 0 auto;
+    padding-bottom: 50px; /* Добавим отступ снизу контейнера */
+}
+
+/* Стили для новой общей категории (теперь отдельный блок) */
+.courses_item_general_block {
+    margin: 50px 0 30px 0; /* Отступы: сверху, справа, снизу, слева */
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.courses-item_link_general {
+    display: block; /* Сделаем его блочным, чтобы занимал всю доступную ширину */
+    padding: 30px 20px;
+    background-color: #1F2122; /* Цвет фона по умолчанию для общей категории */
+    height: 15rem; /* Увеличиваем высоту для выделения */
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.5s ease; /* Плавный переход для фона */
+    border-radius: 28px; /* Добавим закругление для самой ссылки, чтобы блок был круглым */
+}
+
+/* Изменения для заполняющего уголка общей категории */
+.courses-item_link_general:hover .courses-item_bg_general {
+    width: 100%; /* Заполняем всю ширину */
+    height: 100%; /* Заполняем всю высоту */
+    border-radius: 28px; /* Сохраняем скругление плашки */
+    top: 0; /* Перемещаем в верхний левый угол */
+    right: 0; /* Перемещаем в верхний левый угол */
+    transform: none; /* Сбрасываем предыдущие трансформации */
+    background-color: #009688; /* Более приглушенный бирюзовый цвет */
+}
+
+/* Изменения для фона уголка общей категории в обычном состоянии */
+.courses-item_bg_general {
+    height: 128px;
+    width: 128px;
+    background-color: #009688; /* Более приглушенный бирюзовый цвет */
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+    border-radius: 50%;
+    transition: all 0.5s ease; /* Увеличено время перехода для плавности */
+}
+
+
+.courses-item_title_general {
+    font-size: 28px; /* Увеличиваем шрифт заголовка */
+    text-align: center; /* Выравниваем по центру */
+    margin-top: 50px; /* Отступ сверху */
+    min-height: auto; /* Сбрасываем минимальную высоту */
+}
+
+.courses-item_date_general {
+    color: #00ECDC; /* Цвет для даты */
+    font-size: 22px; /* Увеличиваем шрифт даты */
+    text-align: center; /* Выравниваем по центру */
+    width: 100%; /* Занимает всю ширину для центрирования */
+    margin: 0; /* Убираем отступы для центрирования */
+}
+
+
+.courses_box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  
+    padding: 50px 0; /* Отступы для контейнера с 3-мя колонками */
+}
+.courses_item {
+    -ms-flex-preferred-size: calc(33.33333% - 30px);
+    flex-basis: calc(33.33333% - 30px);
+  
+    margin: 0 15px 30px;
+  
+    overflow: hidden;
+  
+    border-radius: 28px;
+}
+.courses-item_link {
+    display: block;
+    padding: 30px 20px;
+    background-color: #1F2122;
+    height: 11rem;
+    overflow: hidden;
+  
+    position: relative;
+    transition: 2s;
+}
+.courses-item_link:hover,
+.courses-item_link:hover .courses-item_date {
+    text-decoration: none;
+    color: #FFF;
+}
+.courses-item_link:hover .courses-item_bg {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+}
+.courses-item_title {
+    min-height: 60px;
+    margin: 0 0 15px 15px;
+  
+    overflow: hidden;
+  
+    font-weight: 600;
+    font-size: 18px;
+    /* Removed: color: #FFF; */
+    text-align: left;
+  
+    z-index: 2;
+    position: relative;
+}
+
+/* Added colors for titles based on block colors */
+.courses_item:nth-child(1n) .courses-item_title { /* This targets the first item */
+    color: #8047DD;
+}
+.courses_item:nth-child(2n) .courses-item_title {
+    color: #53DD47;
+}
+.courses_item:nth-child(3n) .courses-item_title {
+    color: #DD4798;
+}
+.courses_item:nth-child(4n) .courses-item_title {
+    color: #DD6247;
+}
+.courses_item:nth-child(5n) .courses-item_title {
+    color: #DDC547;
+}
+.courses_item:nth-child(6n) .courses-item_title {
+    color: #4795DD;
+}
+
+.courses-item_bg {
+    height: 128px;
+    width: 128px;
+    background-color: #8047DD;
+  
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+  
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+.courses_item:nth-child(2n) .courses-item_bg {
+    background-color: #53DD47;
+}
+.courses_item:nth-child(3n) .courses-item_bg {
+    background-color: #DD4798;
+}
+.courses_item:nth-child(4n) .courses-item_bg {
+    background-color: #DD6247;
+}
+.courses_item:nth-child(5n) .courses-item_bg {
+    background-color: #DDC547;
+}
+.courses_item:nth-child(6n) .courses-item_bg {
+    background-color: #4795DD;
+}
+
+.courses_item:hover .hover-effect-text{
+    color:#ffffff;
+}
+  
+/* Медиазапросы для адаптивности */
+
+/* Для экранов шириной до 1200px (например, ноутбуки или планшеты в горизонтальной ориентации) */
+@media (max-width: 1200px) {
+    header {
+        max-width: 95%; /* Заголовок занимает больше ширины */
+        width: 95%; /* Адаптивная ширина */
+        padding: 20px; /* Уменьшаем отступы */
+    }
+    .courses-item_title {
+        font-weight: 400;
+        font-size: 17px;
+        width: 80%;
+    }
+    /* Removed: .courses-item_date-box { font-size: 17px; } */
+    .section-divider {
+        font-size: 20px;
+        margin: 30px auto; /* Центрируем и уменьшаем отступы */
+        max-width: 95%; /* Адаптивная ширина */
+    }
+    .section-divider p {
+        padding: 0 18px;
+    }
+}
+
+/* Для экранов шириной до 979px */
+@media only screen and (max-width: 979px) {
+    .courses_item {
+        -ms-flex-preferred-size: calc(50% - 30px);
+        flex-basis: calc(50% - 30px);
+    }
+    .courses-item_title {
+        font-size: 22px;
+    }
+    .courses_item_general_block {
+        margin: 50px auto 30px auto; /* Центрируем */
+        max-width: 95%; /* Адаптивная ширина */
+    }
+    .courses-item_link_general {
+        height: 12rem;
+        padding: 25px 20px;
+    }
+    .courses-item_title_general {
+        font-size: 22px;
+        margin-top: 30px;
+    }
+    .courses-item_date_general {
+        font-size: 17px;
+    }
+    .average-rating {
+        font-size: 15px;
+    }
+    .section-divider {
+        font-size: 18px;
+        margin: 25px auto; /* Центрируем и уменьшаем отступы */
+        max-width: 95%; /* Адаптивная ширина */
+    }
+    .section-divider p {
+        padding: 0 15px;
+    }
+}
+
+/* Для экранов шириной до 768px */
+@media (max-width: 768px) {
+    header {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .logo.original { display: none; }
+    .logo.adaptive { display: block; width: 150px; height: auto; }
+
+    .profile-block-link {
+        padding: 6px 12px;
+        gap: 8px;
+    }
+
+    .star-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .average-rating {
+        font-size: 13px;
+    }
+
+    .avatar-image {
+        width: 35px;
+        height: 35px;
+    }
+    .courses_item_general_block {
+        margin: 30px auto 20px auto; /* Центрируем */
+        max-width: 90%; /* Адаптивная ширина */
+    }
+    .courses-item_link_general {
+        height: 10rem;
+        padding: 20px 15px;
+    }
+    .courses-item_title_general {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+    .courses-item_date_general {
+        font-size: 15px;
+    }
+    .courses-item_title {
+        font-size: 16px;
+    }
+    /* Removed: .courses-item_date-box { font-size: 16px; } */
+    .section-divider {
+        font-size: 16px;
+        margin: 20px auto; /* Центрируем и уменьшаем отступы */
+        max-width: 90%; /* Адаптивная ширина */
+    }
+    .section-divider p {
+        padding: 0 12px;
+    }
+}
+
+/* Для экранов шириной до 767px */
+@media only screen and (max-width: 767px) {
+    .format-container {
+        width: 96%;
+        margin: 0 auto; /* Центрируем */
+    }
+    header {
+        width: 96%;
+    }
+}
+
+/* Для экранов шириной до 639px */
+@media only screen and (max-width: 639px) {
+    .courses_item {
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+    }
+    .courses-item_title {
+        min-height: 72px;
+        line-height: 1;
+        font-size: 20px;
+    }
+    .courses-item_link {
+        padding: 22px 40px;
+    }
+    /* Removed: .courses-item_date-box { font-size: 15px; } */
+    .courses_item_general_block {
+        margin: 20px auto 15px auto; /* Центрируем */
+        max-width: 90%; /* Адаптивная ширина */
+    }
+    .courses-item_link_general {
+        height: 8rem;
+        padding: 15px 10px;
+    }
+    .courses-item_title_general {
+        font-size: 17px;
+        margin-top: 15px;
+    }
+    .courses-item_date_general {
+        font-size: 13px;
+    }
+    .section-divider {
+        font-size: 14px;
+        margin: 15px auto; /* Центрируем и уменьшаем отступы */
+        max-width: 90%; /* Адаптивная ширина */
+    }
+    .section-divider p {
+        padding: 0 10px;
+    }
+}
+
+/* Для экранов шириной до 480px */
+@media (max-width: 480px) {
+    body {
+        padding: 0 10px;
+    }
+    header {
+        padding: 10px;
+    }
+    .profile-block-link {
+        padding: 5px 8px;
+        gap: 5px;
+        margin-top: 5px;
+    }
+    .star-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .average-rating {
+        font-size: 10px;
+    }
+
+    .avatar-image {
+        width: 28px;
+        height: 28px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .courses_item_general_block {
+        margin: 15px auto 10px auto; /* Центрируем */
+        max-width: 100%; /* Занимает всю ширину на самых маленьких экранах */
+    }
+    .courses-item_link_general {
+        height: 6rem;
+        padding: 10px 8px;
+    }
+    .courses-item_title_general {
+        font-size: 14px;
+        margin-top: 10px;
+        line-height: 1.2;
+    }
+    .courses-item_date_general {
+        font-size: 11px;
+    }
+
+    .courses_box {
+        padding: 30px 0;
+    }
+    .courses_item {
+        margin: 0 auto 15px auto; /* Центрируем отдельные элементы курсов */
+    }
+    .courses-item_link {
+        padding: 15px 10px;
+        height: auto;
+    }
+    .courses-item_title {
+        font-size: 14px;
+        min-height: auto;
+        margin: 0 0 10px 10px;
+    }
+    /* Removed: .courses-item_date-box { font-size: 12px; margin: 0 0 5px 10px; } */
+    .section-divider {
+        font-size: 12px;
+        margin: 10px auto; /* Центрируем и минимальные отступы */
+        max-width: 100%; /* Занимает всю ширину на самых маленьких экранах */
+    }
+    .section-divider p {
+        padding: 0 8px;
+    }
+}
